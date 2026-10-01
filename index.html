@@ -67,23 +67,33 @@
             background-color: #6366f1;
             color: #fff;
         }
-        .wallet-box {
-            background-color: #e11d48;
-            color: #fff;
-            padding: 14px;
+        .wallet-card {
+            background-color: #334155;
+            border: 1px solid #475569;
             border-radius: 12px;
-            margin: 12px 0;
+            padding: 12px;
+            margin: 10px 0;
+            text-align: center;
+        }
+        .wallet-title {
+            font-size: 14px;
+            color: #38bdf8;
+            margin-bottom: 5px;
             font-weight: bold;
         }
         .wallet-number {
-            font-size: 18px;
+            font-size: 17px;
             letter-spacing: 1px;
-            margin-top: 5px;
-            background: rgba(0,0,0,0.2);
+            background: #0f172a;
+            color: #fff;
             padding: 8px;
             border-radius: 8px;
-            display: inline-block;
+            display: block;
             cursor: pointer;
+            border: 1px dashed #64748b;
+        }
+        .wallet-number:active {
+            background: #1e293b;
         }
         .btn:active {
             transform: scale(0.98);
@@ -114,13 +124,21 @@
             💳 الدفع الفوري عبر InstaPay
         </a>
 
-        <!-- قسم المحفظة الإلكترونية الآمن لجميع الشبكات -->
-        <div class="wallet-box">
-            📱 التحويل للمحفظة الإلكترونية
-            <div class="wallet-number" onclick="copyWallet()" title="اضغط للنسخ">
-                01208884686
+        <!-- قسم المحافظ المتعددة -->
+        <div style="margin-top: 20px; text-align: right;">
+            <div style="font-size: 13px; color: #94a3b8; margin-bottom: 5px; text-align: center;">📱 المحافظ الإلكترونية (اضغط على الرقم للنسخ):</div>
+
+            <!-- المحفظة الأولى -->
+            <div class="wallet-card">
+                <div class="wallet-title">فودافون كاش (Vodafone Cash)</div>
+                <div class="wallet-number" onclick="copyText('01208884686')">01208884686</div>
             </div>
-            <div style="font-size: 11px; color: #f1f5f9; margin-top: 5px;">(اضغط على الرقم للنسخ السريع)</div>
+
+            <!-- المحفظة الثانية (يمكنك تغيير الاسم ورقم الهاتف لأي شبكة أخرى) -->
+            <div class="wallet-card">
+                <div class="wallet-title">إنستاباي / محفظة أخرى (Etisalat/Orange)</div>
+                <div class="wallet-number" onclick="copyText('01012345678')">01012345678</div>
+            </div>
         </div>
 
         <div class="footer">
@@ -129,9 +147,9 @@
     </div>
 
     <script>
-        function copyWallet() {
-            navigator.clipboard.writeText("01208884686");
-            alert("تم نسخ رقم المحفظة بنجاح! 📋");
+        function copyText(text) {
+            navigator.clipboard.writeText(text);
+            alert("تم نسخ الرقم: " + text + " بنجاح! 📋");
         }
     </script>
 
