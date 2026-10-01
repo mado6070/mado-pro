@@ -57,6 +57,7 @@
             transition: 0.2s;
             box-sizing: border-box;
             cursor: pointer;
+            border: none;
         }
         .btn-google {
             background-color: #f59e0b;
@@ -66,9 +67,23 @@
             background-color: #6366f1;
             color: #fff;
         }
-        .btn-wallet {
+        .wallet-box {
             background-color: #e11d48;
             color: #fff;
+            padding: 14px;
+            border-radius: 12px;
+            margin: 12px 0;
+            font-weight: bold;
+        }
+        .wallet-number {
+            font-size: 18px;
+            letter-spacing: 1px;
+            margin-top: 5px;
+            background: rgba(0,0,0,0.2);
+            padding: 8px;
+            border-radius: 8px;
+            display: inline-block;
+            cursor: pointer;
         }
         .btn:active {
             transform: scale(0.98);
@@ -99,15 +114,26 @@
             💳 الدفع الفوري عبر InstaPay
         </a>
 
-        <!-- زرار المحفظة الإلكترونية (فودافون كاش) -->
-        <a href="tel:*9*7*01208884686#" class="btn btn-wallet">
-            📱 الدفع عبر المحفظة (01208884686)
-        </a>
+        <!-- قسم المحفظة الإلكترونية الآمن لجميع الشبكات -->
+        <div class="wallet-box">
+            📱 التحويل للمحفظة الإلكترونية
+            <div class="wallet-number" onclick="copyWallet()" title="اضغط للنسخ">
+                01208884686
+            </div>
+            <div style="font-size: 11px; color: #f1f5f9; margin-top: 5px;">(اضغط على الرقم للنسخ السريع)</div>
+        </div>
 
         <div class="footer">
             Powered by ReviewPro Solutions 🚀
         </div>
     </div>
+
+    <script>
+        function copyWallet() {
+            navigator.clipboard.writeText("01208884686");
+            alert("تم نسخ رقم المحفظة بنجاح! 📋");
+        }
+    </script>
 
 </body>
 </html>
