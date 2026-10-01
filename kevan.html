@@ -8,12 +8,11 @@
     <style>
         :root {
             --bg-base: #111412;
-            --card-surface: rgba(22, 28, 24, 0.8);
+            --card-surface: rgba(22, 28, 24, 0.85);
             --border-glow: rgba(140, 166, 122, 0.25);
             --text-main: #f3f4f6;
             --text-secondary: #a3b19b;
             --primary-accent: #8ca67a;
-            --coffee-gold: #c29b38;
         }
 
         * {
@@ -131,7 +130,6 @@
             box-shadow: 0 10px 25px rgba(99, 102, 241, 0.25);
         }
 
-        /* المحافظ الإلكترونية المتعددة */
         .wallets-wrapper {
             margin: 12px 0;
         }
@@ -223,7 +221,6 @@
             transform: scale(0.92);
         }
 
-        /* شبكة السوشيال ميديا */
         .social-matrix {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -252,7 +249,6 @@
         .s-fb { background: rgba(24, 119, 242, 0.12); color: #60a5fa; }
         .s-wa { background: rgba(37, 211, 102, 0.12); color: #4ade80; }
 
-        /* بانر التسويق الذاتي لـ Tapio */
         .self-promo-banner {
             margin-top: 22px;
             background: linear-gradient(135deg, rgba(140, 166, 122, 0.08) 0%, rgba(90, 115, 77, 0.15) 100%);
@@ -305,9 +301,9 @@
 <body>
 
     <div class="profile-card">
-        <!-- شعار كيفان -->
+        <!-- لوجو كيفان الحقيقي -->
         <div class="avatar-wrapper">
-            <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=150" alt="Kayfan Logo" class="avatar">
+            <img src="https://i.ibb.co/1G8V07k/image.png" alt="Kayfan Logo" class="avatar" onerror="this.src='https://images.unsplash.com/photo-1511920170033-f8396924c348?w=150'">
         </div>
         
         <h1 class="business-title">كيفان</h1>
@@ -324,7 +320,7 @@
             <span>‹</span>
         </a>
 
-        <!-- المحافظ الإلكترونية (رقمين) -->
+        <!-- المحافظ الإلكترونية -->
         <div class="wallets-wrapper">
             <button class="wallets-toggle-btn" onclick="toggleWalletDrawer()">
                 <span>📱 فودافون كاش (المحافظ)</span>
