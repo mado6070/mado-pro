@@ -58,6 +58,7 @@
             box-sizing: border-box;
             cursor: pointer;
             border: none;
+            text-align: center;
         }
         .btn-google {
             background-color: #f59e0b;
@@ -67,34 +68,77 @@
             background-color: #6366f1;
             color: #fff;
         }
-        .wallet-card {
-            background-color: #334155;
-            border: 1px solid #475569;
-            border-radius: 12px;
-            padding: 12px;
-            margin: 10px 0;
-            text-align: center;
+        
+       /* تصميم قائمة المحافظ المنسدلة */
+        .dropdown {
+            margin: 12px 0;
+            width: 100%;
         }
-        .wallet-title {
-            font-size: 14px;
+        .drop-btn {
+            background-color: #e11d48;
+            color: #fff;
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            transition: 0.2s;
+        }
+        .drop-content {
+            display: none;
+            background-color: #334155;
+            border-radius: 12px;
+            margin-top: 8px;
+            padding: 12px;
+            border: 1px solid #475569;
+            text-align: right;
+        }
+        .drop-content.show {
+            display: block;
+        }
+        .wallet-item {
+            background: #0f172a;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .wallet-item:last-child {
+            margin-bottom: 0;
+        }
+        .wallet-info .w-name {
+            font-size: 13px;
             color: #38bdf8;
-            margin-bottom: 5px;
             font-weight: bold;
         }
-        .wallet-number {
-            font-size: 17px;
-            letter-spacing: 1px;
-            background: #0f172a;
+        .wallet-info .w-num {
+            font-size: 15px;
             color: #fff;
-            padding: 8px;
-            border-radius: 8px;
-            display: block;
+            letter-spacing: 0.5px;
+        }
+        .copy-btn {
+            background-color: #e11d48;
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
             cursor: pointer;
-            border: 1px dashed #64748b;
+            font-weight: bold;
+            transition: 0.2s;
         }
-        .wallet-number:active {
-            background: #1e293b;
+        .copy-btn:active {
+            transform: scale(0.95);
         }
+
         .btn:active {
             transform: scale(0.98);
         }
@@ -124,20 +168,41 @@
             💳 الدفع الفوري عبر InstaPay
         </a>
 
-        <!-- قسم المحافظ المتعددة -->
-        <div style="margin-top: 20px; text-align: right;">
-            <div style="font-size: 13px; color: #94a3b8; margin-bottom: 5px; text-align: center;">📱 المحافظ الإلكترونية (اضغط على الرقم للنسخ):</div>
+        <!-- قائمة المحافظ المنسدلة -->
+        <div class="dropdown">
+            <button class="drop-btn" onclick="toggleDropdown()">
+                <span>📱 الدفع عبر المحفظة الإلكترونية</span>
+                <span>▼</span>
+            </button>
+            <div id="walletDropdown" class="drop-content">
+                
+                <!-- محفظة 1 -->
+                <div class="wallet-item">
+                    <div class="wallet-info">
+                        <div class="w-name">فودافون كاش (Vodafone)</div>
+                        <div class="w-num">01208884686</div>
+                    </div>
+                    <button class="copy-btn" onclick="copyText('01208884686')">نسخ</button>
+                </div>
 
-            <!-- المحفظة الأولى -->
-            <div class="wallet-card">
-                <div class="wallet-title">فودافون كاش (Vodafone Cash)</div>
-                <div class="wallet-number" onclick="copyText('01208884686')">01208884686</div>
-            </div>
+                <!-- محفظة 2 (يمكنك تغيير البيانات حسب الرغبة) -->
+                <div class="wallet-item">
+                    <div class="wallet-info">
+                        <div class="w-name">اتصالات كاش (Etisalat)</div>
+                        <div class="w-num">01111111111</div>
+                    </div>
+                    <button class="copy-btn" onclick="copyText('01111111111')">نسخ</button>
+                </div>
 
-            <!-- المحفظة الثانية (يمكنك تغيير الاسم ورقم الهاتف لأي شبكة أخرى) -->
-            <div class="wallet-card">
-                <div class="wallet-title">إنستاباي / محفظة أخرى (Etisalat/Orange)</div>
-                <div class="wallet-number" onclick="copyText('01012345678')">01012345678</div>
+                <!-- محفظة 3 (يمكنك تغيير البيانات حسب الرغبة) -->
+                <div class="wallet-item">
+                    <div class="wallet-info">
+                        <div class="w-name">أورانج كاش (Orange)</div>
+                        <div class="w-num">01222222222</div>
+                    </div>
+                    <button class="copy-btn" onclick="copyText('01222222222')">نسخ</button>
+                </div>
+
             </div>
         </div>
 
@@ -147,6 +212,12 @@
     </div>
 
     <script>
+        // دالة فتح وإغلاق القائمة
+        function toggleDropdown() {
+            document.getElementById("walletDropdown").classList.toggle("show");
+        }
+
+        // دالة النسخ السريع
         function copyText(text) {
             navigator.clipboard.writeText(text);
             alert("تم نسخ الرقم: " + text + " بنجاح! 📋");
