@@ -3,12 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بوابة الدفع والتقييم - Mado</title>
+    <title>بوابة الدفع والتقييم الذكية</title>
     <style>
+        :root {
+            --bg-color: #090d16;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0f172a;
-            color: #ffffff;
+            background: linear-gradient(135deg, #090d16 0%, #1e1b4b 100%);
+            color: var(--text-main);
             margin: 0;
             padding: 20px;
             display: flex;
@@ -16,71 +24,120 @@
             align-items: center;
             min-height: 100vh;
         }
+
         .container {
             width: 100%;
             max-width: 400px;
-            background: #1e293b;
-            padding: 30px 20px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 35px 20px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
             text-align: center;
-            border: 1px solid #334155;
+            border: 1px solid var(--border-color);
         }
+
+        .logo-container {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 15px auto;
+        }
+
         .logo {
-            width: 90px;
-            height: 90px;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            margin-bottom: 15px;
             border: 3px solid #38bdf8;
-            background: #334155;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+            background: #1e293b;
         }
+
         h1 {
             font-size: 24px;
             margin-bottom: 5px;
-            color: #f8fafc;
+            font-weight: 700;
         }
+
         p {
-            color: #94a3b8;
+            color: var(--text-muted);
             font-size: 14px;
             margin-bottom: 25px;
         }
+
         .btn {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             width: 100%;
-            padding: 14px;
-            margin: 12px 0;
-            border-radius: 12px;
+            padding: 15px;
+            margin: 14px 0;
+            border-radius: 14px;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 600;
             font-size: 16px;
-            transition: 0.2s;
+            transition: all 0.3s ease;
             box-sizing: border-box;
             cursor: pointer;
             border: none;
-            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
         .btn-google {
-            background-color: #f59e0b;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
             color: #000;
         }
+
         .btn-instapay {
-            background-color: #6366f1;
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
             color: #fff;
         }
-        
-       /* تصميم قائمة المحافظ المنسدلة */
-        .dropdown {
-            margin: 12px 0;
-            width: 100%;
+
+        /* أزرار السوشيال ميديا للمحل */
+        .social-group {
+            display: flex;
+            gap: 10px;
+            margin: 14px 0;
         }
-        .drop-btn {
-            background-color: #e11d48;
-            color: #fff;
-            width: 100%;
-            padding: 14px;
+
+        .btn-social {
+            flex: 1;
+            padding: 12px;
             border-radius: 12px;
-            font-weight: bold;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: 0.3s;
+        }
+
+        .btn-facebook { background-color: #1877f2; }
+        .btn-instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+        .btn-whatsapp { background-color: #25d366; }
+
+        .dropdown {
+            margin: 14px 0;
+            width: 100%;
+        }
+
+        .drop-btn {
+            background: linear-gradient(135deg, #f43f5e, #e11d48);
+            color: #fff;
+            width: 100%;
+            padding: 15px;
+            border-radius: 14px;
+            font-weight: 600;
             font-size: 16px;
             border: none;
             cursor: pointer;
@@ -88,136 +145,184 @@
             justify-content: space-between;
             align-items: center;
             box-sizing: border-box;
-            transition: 0.2s;
         }
+
         .drop-content {
-            display: none;
-            background-color: #334155;
-            border-radius: 12px;
-            margin-top: 8px;
-            padding: 12px;
-            border: 1px solid #475569;
-            text-align: right;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: rgba(15, 23, 42, 0.6);
+            border-radius: 14px;
+            margin-top: 5px;
+            padding: 0 10px;
+            border: 1px solid transparent;
         }
+
         .drop-content.show {
-            display: block;
+            max-height: 350px;
+            padding: 12px 10px;
+            border-color: var(--border-color);
+            transition: max-height 0.3s ease-in;
         }
+
         .wallet-item {
-            background: #0f172a;
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 10px;
+            background: rgba(30, 41, 59, 0.8);
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border: 1px solid rgba(255,255,255,0.05);
         }
-        .wallet-item:last-child {
-            margin-bottom: 0;
+
+        .wallet-info {
+            text-align: right;
         }
+
         .wallet-info .w-name {
             font-size: 13px;
             color: #38bdf8;
             font-weight: bold;
+            margin-bottom: 2px;
         }
+
         .wallet-info .w-num {
             font-size: 15px;
             color: #fff;
             letter-spacing: 0.5px;
+            font-family: monospace;
         }
+
+        .wallet-info .w-owner {
+            font-size: 11px;
+            color: #cbd5e1;
+            margin-top: 3px;
+        }
+
         .copy-btn {
-            background-color: #e11d48;
-            color: #fff;
+            background-color: #38bdf8;
+            color: #0f172a;
             border: none;
-            padding: 6px 12px;
-            border-radius: 6px;
+            padding: 8px 14px;
+            border-radius: 8px;
             font-size: 12px;
             cursor: pointer;
             font-weight: bold;
-            transition: 0.2s;
-        }
-        .copy-btn:active {
-            transform: scale(0.95);
         }
 
-        .btn:active {
-            transform: scale(0.98);
-        }
         .footer {
-            margin-top: 20px;
-            font-size: 11px;
-            color: #64748b;
+            margin-top: 25px;
+            font-size: 12px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+        }
+
+        .footer span {
+            color: #38bdf8;
+            font-weight: bold;
+        }
+
+        /* زرار طلب الخدمة (التسويق الذاتي) */
+        .promo-box {
+            margin-top: 15px;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px dashed rgba(56, 189, 248, 0.4);
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .promo-text {
+            font-size: 12px;
+            color: #cbd5e1;
+            margin-bottom: 8px;
+        }
+
+        .btn-get-hub {
+            display: block;
+            background: linear-gradient(135deg, #38bdf8, #0284c7);
+            color: #0f172a;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 13px;
+            transition: 0.2s;
+        }
+
+        .btn-get-hub:hover {
+            opacity: 0.9;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- لوجو Mado -->
-        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150" alt="Mado Logo" class="logo">
+        <div class="logo-container">
+            <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=150" alt="Logo" class="logo">
+        </div>
         
-        <h1>Mado</h1>
-        <p>شكراً لزيارتك! يرجى اختيار الخدمة المطلوبة أدناه:</p>
+        <h1>قهوتنا</h1>
+        <p>أهلاً بك! نسعد دائماً بخدمتك وتقييمك لنا</p>
 
-        <!-- زرار تقييم جوجل المباشر -->
-        <a href="https://search.google.com/local/writereview?placeid=ChIJfdYbWADf9RQR_HyAz1upcCo&utm_source=chatgpt.com&pli=1" class="btn btn-google" target="_blank">
+        <!-- زرار تقييم جوجل -->
+        <a href="رابط_جوجل_هنا" class="btn btn-google" target="_blank">
             ⭐ قيّمنا بـ 5 نجوم على جوجل
         </a>
 
         <!-- زرار إنستاباي -->
-        <a href="https://ipn.eg/S/mohamed.ahmed424161/instapay/3hr1LX" class="btn btn-instapay" target="_blank">
+        <a href="رابط_انستاباي_هنا" class="btn btn-instapay" target="_blank">
             💳 الدفع الفوري عبر InstaPay
         </a>
+
+        <!-- أزرار السوشيال ميديا للمحل -->
+        <div class="social-group">
+            <a href="رابط_الفيسبوك_هنا" class="btn-social btn-facebook" target="_blank">فيسبوك</a>
+            <a href="رابط_الانستجرام_هنا" class="btn-social btn-instagram" target="_blank">انستجرام</a>
+            <a href="رابط_الواتساب_هنا" class="btn-social btn-whatsapp" target="_blank">واتساب</a>
+        </div>
 
         <!-- قائمة المحافظ المنسدلة -->
         <div class="dropdown">
             <button class="drop-btn" onclick="toggleDropdown()">
                 <span>📱 الدفع عبر المحفظة الإلكترونية</span>
-                <span>▼</span>
+                <span id="arrow">▼</span>
             </button>
             <div id="walletDropdown" class="drop-content">
                 
-                <!-- محفظة 1 -->
                 <div class="wallet-item">
                     <div class="wallet-info">
-                        <div class="w-name">فودافون كاش (Vodafone)</div>
+                        <div class="w-name">فودافون كاش</div>
                         <div class="w-num">01208884686</div>
+                        <div class="w-owner">باسم: mohamed m** a** a</div>
                     </div>
                     <button class="copy-btn" onclick="copyText('01208884686')">نسخ</button>
-                </div>
-
-                <!-- محفظة 2 (يمكنك تغيير البيانات حسب الرغبة) -->
-                <div class="wallet-item">
-                    <div class="wallet-info">
-                        <div class="w-name">اتصالات كاش (Etisalat)</div>
-                        <div class="w-num">01111111111</div>
-                    </div>
-                    <button class="copy-btn" onclick="copyText('01111111111')">نسخ</button>
-                </div>
-
-                <!-- محفظة 3 (يمكنك تغيير البيانات حسب الرغبة) -->
-                <div class="wallet-item">
-                    <div class="wallet-info">
-                        <div class="w-name">أورانج كاش (Orange)</div>
-                        <div class="w-num">01222222222</div>
-                    </div>
-                    <button class="copy-btn" onclick="copyText('01222222222')">نسخ</button>
                 </div>
 
             </div>
         </div>
 
+        <!-- قسم التسويق الذاتي (عشان الزباين تكلمك) -->
+        <div class="promo-box">
+            <div class="promo-text">عجبك الستاند الذكي وحابب تعمل واحد لمشروعك؟ 🚀</div>
+            <a href="https://wa.me/201208884686?text=مرحباً%20ماضو،%20أعجبني%20نظام%20Tapio%20وأريد%20عمل%20ستاند%20ذكي%20لمشروعي" class="btn-get-hub" target="_blank">
+                احصل على ستاند ذكي لمشروعك الآن
+            </a>
+        </div>
+
         <div class="footer">
-            Powered by ReviewPro Solutions 🚀
+            Powered by <span>Tapio</span> 🚀
         </div>
     </div>
 
     <script>
-        // دالة فتح وإغلاق القائمة
         function toggleDropdown() {
-            document.getElementById("walletDropdown").classList.toggle("show");
+            const dropdown = document.getElementById("walletDropdown");
+            dropdown.classList.toggle("show");
         }
 
-        // دالة النسخ السريع
         function copyText(text) {
             navigator.clipboard.writeText(text);
             alert("تم نسخ الرقم: " + text + " بنجاح! 📋");
