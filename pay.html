@@ -3,57 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tapio | بوابة الدفع والتقييم الذكية</title>
+    <title>PÀO | البوابة الذكية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-gradient: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #090d16 100%);
-            --card-bg: rgba(15, 23, 42, 0.75);
-            --border-glass: rgba(255, 255, 255, 0.08);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
+            --pao-bg: #0c1210; /* أخضر غامق ملكي مستوحى من هويبتهم */
+            --pao-card: rgba(22, 32, 28, 0.75);
+            --pao-border: rgba(92, 140, 115, 0.2);
+            --pao-accent: #79b793; /* أخضر هادئ ورايق */
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
         }
 
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: var(--bg-gradient);
+            background-color: var(--pao-bg);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(121, 183, 147, 0.1) 0%, transparent 60%);
             color: var(--text-main);
-            margin: 0;
-            padding: 20px;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            padding: 24px;
         }
 
-        .container {
+        .card {
             width: 100%;
             max-width: 410px;
-            background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            background: var(--pao-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--pao-border);
+            border-radius: 32px;
             padding: 35px 22px;
-            border-radius: 28px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
             text-align: center;
-            border: 1px solid var(--border-glass);
-            position: relative;
-            overflow: hidden;
         }
 
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #38bdf8, transparent);
-        }
-
-        .logo-container {
+        .logo-box {
             width: 95px;
             height: 95px;
-            margin: 0 auto 18px auto;
+            margin: 0 auto 16px auto;
+            border-radius: 50%;
+            padding: 3px;
+            background: linear-gradient(135deg, #79b793, #3b5a49);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 25px rgba(121, 183, 147, 0.25);
         }
 
         .logo {
@@ -61,16 +65,15 @@
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #38bdf8;
-            box-shadow: 0 0 25px rgba(56, 189, 248, 0.35);
-            background: #1e293b;
+            background: #0c1210;
         }
 
         h1 {
-            font-size: 22px;
-            margin-bottom: 6px;
-            font-weight: 700;
-            letter-spacing: -0.3px;
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+            color: #fff;
         }
 
         p {
@@ -79,272 +82,258 @@
             margin-bottom: 24px;
         }
 
-        .btn {
+        .link-btn {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
+            justify-content: space-between;
             width: 100%;
-            padding: 15px;
+            padding: 15px 18px;
             margin: 12px 0;
-            border-radius: 14px;
+            border-radius: 16px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 15px;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            box-sizing: border-box;
+            transition: 0.25s ease;
+            border: 1px solid rgba(255, 255, 255, 0.04);
             cursor: pointer;
-            border: none;
         }
 
-        .btn:hover {
-            transform: translateY(-3px);
-            filter: brightness(1.05);
+        .link-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.08);
         }
 
         .btn-google {
-            background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
             color: #000;
-            box-shadow: 0 8px 20px rgba(251, 191, 36, 0.25);
-            font-weight: 700;
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.2);
         }
 
         .btn-instapay {
             background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
             color: #fff;
-            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.25);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.2);
         }
 
-        .dropdown {
+        /* ستايل المحافظ */
+        .wallet-container {
             margin: 12px 0;
-            width: 100%;
         }
 
-        .drop-btn {
+        .wallet-toggle {
             background: linear-gradient(135deg, #f43f5e 0%, #be123c 100%);
             color: #fff;
             width: 100%;
-            padding: 15px;
-            border-radius: 14px;
-            font-weight: 600;
+            padding: 15px 18px;
+            border-radius: 16px;
+            font-weight: 700;
             font-size: 15px;
             border: none;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-sizing: border-box;
-            box-shadow: 0 8px 20px rgba(244, 63, 94, 0.25);
-            transition: all 0.25s ease;
+            box-shadow: 0 8px 20px rgba(244, 63, 94, 0.2);
+            transition: 0.25s;
         }
 
-        .drop-btn:hover {
-            transform: translateY(-3px);
-            filter: brightness(1.05);
+        .wallet-toggle:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.08);
         }
 
-        .drop-content {
+        .wallet-dropdown {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            background-color: rgba(30, 41, 59, 0.5);
-            border-radius: 14px;
+            transition: max-height 0.35s ease;
+            background: rgba(12, 18, 16, 0.6);
+            border-radius: 16px;
             margin-top: 6px;
-            padding: 0 8px;
-            border: 1px solid transparent;
+            padding: 0 10px;
         }
 
-        .drop-content.show {
-            max-height: 320px;
-            padding: 12px 8px;
-            border-color: var(--border-glass);
+        .wallet-dropdown.active {
+            max-height: 250px;
+            padding: 12px 10px;
+            border: 1px solid var(--pao-border);
         }
 
-        .wallet-item {
-            background: rgba(15, 23, 42, 0.6);
+        .wallet-row {
+            background: rgba(255, 255, 255, 0.03);
             padding: 12px;
-            border-radius: 10px;
-            margin-bottom: 6px;
+            border-radius: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 1px solid rgba(255, 255, 255, 0.04);
         }
 
-        .wallet-info {
+        .wallet-details {
             text-align: right;
         }
 
-        .wallet-info .w-name {
+        .w-title {
             font-size: 12px;
-            color: #38bdf8;
-            font-weight: 700;
-            margin-bottom: 2px;
+            color: var(--pao-accent);
+            font-weight: 800;
         }
 
-        .wallet-info .w-num {
+        .w-digits {
             font-size: 14.5px;
+            font-family: monospace;
             color: #fff;
             letter-spacing: 0.5px;
-            font-family: monospace;
         }
 
-        .wallet-info .w-owner {
+        .w-owner {
             font-size: 10.5px;
             color: var(--text-muted);
-            margin-top: 2px;
         }
 
-        .copy-btn {
-            background-color: #38bdf8;
-            color: #0f172a;
+        .copy-action {
+            background: var(--pao-accent);
+            color: #0c1210;
             border: none;
-            padding: 7px 12px;
-            border-radius: 8px;
+            padding: 7px 14px;
+            border-radius: 9px;
             font-size: 12px;
+            font-weight: 800;
             cursor: pointer;
-            font-weight: 700;
-            transition: 0.2s;
         }
 
-        .copy-btn:active {
-            transform: scale(0.92);
-        }
-
-        /* أزرار السوشيال ميديا (فيس، انستا، تيك توك، واتساب) */
+        /* شبكة السوشيال ميديا */
         .social-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
+            gap: 10px;
             margin: 14px 0;
         }
 
-        .btn-social {
-            padding: 11px;
-            border-radius: 12px;
+        .social-chip {
+            padding: 12px;
+            border-radius: 14px;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 13px;
-            color: #fff;
+            font-size: 13.5px;
+            font-weight: 700;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 6px;
+            border: 1px solid rgba(255,255,255,0.05);
             transition: 0.25s;
-            border: 1px solid rgba(255,255,255,0.06);
         }
 
-        .btn-social:hover {
+        .social-chip:hover {
             transform: translateY(-2px);
         }
 
-        .btn-facebook { background: rgba(24, 119, 242, 0.2); color: #60a5fa; }
-        .btn-instagram { background: rgba(220, 39, 67, 0.2); color: #f472b6; }
-        .btn-tiktok { background: rgba(255, 255, 255, 0.1); color: #ffffff; }
-        .btn-whatsapp { background: rgba(37, 211, 102, 0.2); color: #4ade80; }
+        .s-fb { background: rgba(24, 119, 242, 0.12); color: #60a5fa; }
+        .s-ig { background: rgba(220, 39, 67, 0.12); color: #f472b6; }
+        .s-tk { background: rgba(255, 255, 255, 0.06); color: #fff; }
+        .s-wa { background: rgba(37, 211, 102, 0.12); color: #4ade80; }
 
-        /* زرار طلب الخدمة الاحترافي */
-        .promo-box {
+        /* بوكس التسويق الذاتي لـ Tapio */
+        .promo-card {
             margin-top: 18px;
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.08) 0%, rgba(2, 132, 199, 0.15) 100%);
-            border: 1px dashed rgba(56, 189, 248, 0.35);
+            background: linear-gradient(135deg, rgba(121, 183, 147, 0.08), rgba(59, 90, 73, 0.15));
+            border: 1px dashed rgba(121, 183, 147, 0.4);
             padding: 16px;
             border-radius: 18px;
             text-align: center;
         }
 
-        .promo-text {
+        .promo-msg {
             font-size: 12.5px;
             color: #cbd5e1;
-            margin-bottom: 12px;
-            font-weight: 500;
+            margin-bottom: 10px;
+            font-weight: 600;
         }
 
-        .btn-get-hub {
+        .promo-cta {
             display: block;
-            background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
-            color: #0f172a;
+            background: linear-gradient(135deg, #79b793, #4e8765);
+            color: #0c1210;
             text-decoration: none;
             padding: 13px;
             border-radius: 12px;
-            font-weight: 700;
+            font-weight: 800;
             font-size: 14.5px;
-            box-shadow: 0 8px 20px rgba(56, 189, 248, 0.3);
-            transition: all 0.25s ease;
+            box-shadow: 0 6px 20px rgba(121, 183, 147, 0.25);
+            transition: 0.25s;
         }
 
-        .btn-get-hub:hover {
+        .promo-cta:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 25px rgba(56, 189, 248, 0.45);
-            filter: brightness(1.05);
+            filter: brightness(1.08);
         }
 
         .footer {
             margin-top: 22px;
             font-size: 11.5px;
             color: var(--text-muted);
-            border-top: 1px solid var(--border-glass);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
             padding-top: 14px;
         }
 
         .footer span {
-            color: #38bdf8;
-            font-weight: 700;
+            color: var(--pao-accent);
+            font-weight: 800;
             letter-spacing: 0.5px;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- لوجو العميل الرايق -->
-        <div class="logo-container">
+    <div class="card">
+        <!-- لوجو PÀO -->
+        <div class="logo-box">
             <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?w=150" alt="Logo" class="logo">
         </div>
         
-        <h1>اسم المحل هنا</h1>
-        <p>أهلاً بك! نسعد دائماً بخدمتك وتقييمك لنا</p>
+        <h1>PÀO</h1>
+        <p>Boba & More • نسعد دائماً بخدمتك وتقييمك لنا</p>
 
-        <!-- زرار تقييم جوجل (ضع الرابط مكانه) -->
-        <a href="رابط_جوجل_ريفيو_هنا" class="btn btn-google" target="_blank">
-            ⭐ قيّمنا بـ 5 نجوم على جوجل
+        <!-- تقييم جوجل -->
+        <a href="رابط_جوجل" class="link-btn btn-google" target="_blank">
+            <span>⭐ قيّمنا بـ 5 نجوم على جوجل</span>
+            <span>‹</span>
         </a>
 
-        <!-- زرار إنستاباي (ضع الرابط مكانه) -->
-        <a href="رابط_انستاباي_هنا" class="btn btn-instapay" target="_blank">
-            💳 الدفع الفوري عبر InstaPay
+        <!-- إنستاباي -->
+        <a href="https://ipn.eg/" class="link-btn btn-instapay" target="_blank">
+            <span>💳 الدفع الفوري عبر InstaPay</span>
+            <span>‹</span>
         </a>
 
-        <!-- قائمة المحافظ المنسدلة -->
-        <div class="dropdown">
-            <button class="drop-btn" onclick="toggleDropdown()">
-                <span>📱 الدفع عبر المحفظة الإلكترونية</span>
-                <span id="arrow">▾</span>
+        <!-- المحافظ -->
+        <div class="wallet-container">
+            <button class="wallet-toggle" onclick="toggleWallets()">
+                <span>📱 المحافظ الإلكترونية</span>
+                <span id="arrowIcon">▾</span>
             </button>
-            <div id="walletDropdown" class="drop-content">
-                <div class="wallet-item">
-                    <div class="wallet-info">
-                        <div class="w-name">فودافون كاش</div>
-                        <div class="w-num">01208884686</div>
+            <div id="walletList" class="wallet-dropdown">
+                <div class="wallet-row">
+                    <div class="wallet-details">
+                        <div class="w-title">فودافون كاش</div>
+                        <div class="w-digits">01208884686</div>
                         <div class="w-owner">باسم: mohamed m** a** a</div>
                     </div>
-                    <button class="copy-btn" onclick="copyText('01208884686')">نسخ</button>
+                    <button class="copy-action" onclick="copyNum('01208884686')">نسخ</button>
                 </div>
             </div>
         </div>
 
-        <!-- أزرار السوشيال ميديا (فيس، انستا، تيك توك، واتساب) -->
+        <!-- السوشيال ميديا -->
         <div class="social-grid">
-            <a href="رابط_الفيسبوك" class="btn-social btn-facebook" target="_blank">فيسبوك</a>
-            <a href="رابط_الانستجرام" class="btn-social btn-instagram" target="_blank">انستجرام</a>
-            <a href="رابط_التيكتوك" class="btn-social btn-tiktok" target="_blank">تيك توك</a>
-            <a href="رابط_الواتساب" class="btn-social btn-whatsapp" target="_blank">واتساب</a>
+            <a href="رابط_فيس" class="social-chip s-fb" target="_blank">فيسبوك</a>
+            <a href="رابط_انستا" class="social-chip s-ig" target="_blank">انستجرام</a>
+            <a href="رابط_تيكتوك" class="social-chip s-tk" target="_blank">تيك توك</a>
+            <a href="رابط_واتساب" class="social-chip s-wa" target="_blank">واتساب</a>
         </div>
 
-        <!-- زرار طلب الخدمة (التسويق الذاتي لـ Tapio) -->
-        <div class="promo-box">
-            <div class="promo-text">عجبك الستاند الذكي وحابب تعمل واحد لمشروعك؟ 🚀</div>
-            <a href="https://wa.me/201208884686?text=مرحباً%20ماضو،%20أعجبني%20نظام%20Tapio%20وأريد%20عمل%20ستاند%20ذكي%20لمشروعي" class="btn-get-hub" target="_blank">
+        <!-- التسويق الذاتي -->
+        <div class="promo-card">
+            <div class="promo-msg">عجبك الستاند الذكي وحابب تعمل واحد لمشروعك؟ 🚀</div>
+            <a href="https://wa.me/201208884686?text=مرحباً%20ماضو،%20أعجبني%20نظام%20Tapio%20وأريد%20عمل%20ستاند%20ذكي%20لمشروعي" class="promo-cta" target="_blank">
                 ✨ احصل على ستاند ذكي لمشروعك الآن
             </a>
         </div>
@@ -355,14 +344,15 @@
     </div>
 
     <script>
-        function toggleDropdown() {
-            const dropdown = document.getElementById("walletDropdown");
-            dropdown.classList.toggle("show");
+        function toggleWallets() {
+            const list = document.getElementById("walletList");
+            const arrow = document.getElementById("arrowIcon");
+            list.classList.toggle("active");
+            arrow.style.transform = list.classList.contains("active") ? "rotate(180deg)" : "rotate(0deg)";
         }
-
-        function copyText(text) {
-            navigator.clipboard.writeText(text);
-            alert("تم نسخ الرقم: " + text + " بنجاح! 📋");
+        function copyNum(txt) {
+            navigator.clipboard.writeText(txt);
+            alert("تم نسخ الرقم بنجاح! 📋");
         }
     </script>
 
