@@ -3,95 +3,377 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة الدفع - Tapio</title>
+    <title>Tapio | بوابة الدفع والتقييم الذكية</title>
     <style>
+        :root {
+            --bg-gradient: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #090d16 100%);
+            --card-bg: rgba(15, 23, 42, 0.75);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-glow: rgba(56, 189, 248, 0.15);
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f7f6;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-main);
             margin: 0;
             padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 410px;
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 35px 22px;
+            border-radius: 28px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+            text-align: center;
+            border: 1px solid var(--border-glass);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #38bdf8, transparent);
+        }
+
+        .logo-container {
+            width: 95px;
+            height: 95px;
+            margin: 0 auto 18px auto;
+            position: relative;
+        }
+
+        .logo {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #38bdf8;
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.35);
+            background: #1e293b;
+        }
+
+        h1 {
+            font-size: 22px;
+            margin-bottom: 6px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        p {
+            color: var(--text-muted);
+            font-size: 13.5px;
+            margin-bottom: 24px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            box-sizing: border-box;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            filter: brightness(1.05);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .btn-google {
+            background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+            color: #000;
+            box-shadow: 0 8px 20px rgba(251, 191, 36, 0.25);
+            font-weight: 700;
+        }
+
+        .btn-instapay {
+            background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
+            color: #fff;
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.25);
+        }
+
+        /* قائمة المحافظ المنسدلة الأنيقة */
+        .dropdown {
+            margin: 12px 0;
+            width: 100%;
+        }
+
+        .drop-btn {
+            background: linear-gradient(135deg, #f43f5e 0%, #be123c 100%);
+            color: #fff;
+            width: 100%;
+            padding: 15px;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            box-shadow: 0 8px 20px rgba(244, 63, 94, 0.25);
+            transition: all 0.25s ease;
+        }
+
+        .drop-btn:hover {
+            transform: translateY(-3px);
+            filter: brightness(1.05);
+        }
+
+        .drop-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            background-color: rgba(30, 41, 59, 0.5);
+            border-radius: 14px;
+            margin-top: 6px;
+            padding: 0 8px;
+            border: 1px solid transparent;
+        }
+
+        .drop-content.show {
+            max-height: 320px;
+            padding: 12px 8px;
+            border-color: var(--border-glass);
+        }
+
+        .wallet-item {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .wallet-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .wallet-info {
+            text-align: right;
+        }
+
+        .wallet-info .w-name {
+            font-size: 12px;
+            color: #38bdf8;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .wallet-info .w-num {
+            font-size: 14.5px;
+            color: #fff;
+            letter-spacing: 0.5px;
+            font-family: monospace;
+        }
+
+        .wallet-info .w-owner {
+            font-size: 10.5px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .copy-btn {
+            background-color: #38bdf8;
+            color: #0f172a;
+            border: none;
+            padding: 7px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: 0.2s;
+        }
+
+        .copy-btn:active {
+            transform: scale(0.92);
+        }
+
+        /* أزرار السوشيال ميديا تحت المحافظ */
+        .social-group {
+            display: flex;
+            gap: 10px;
+            margin: 14px 0;
+        }
+
+        .btn-social {
+            flex: 1;
+            padding: 11px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: 0.25s;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .btn-social:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-facebook { background: rgba(24, 119, 242, 0.2); color: #60a5fa; }
+        .btn-instagram { background: rgba(220, 39, 67, 0.2); color: #f472b6; }
+        .btn-whatsapp { background: rgba(37, 211, 102, 0.2); color: #4ade80; }
+
+        /* زرار طلب الخدمة الاحترافي والبارز */
+        .promo-box {
+            margin-top: 18px;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.08) 0%, rgba(2, 132, 199, 0.15) 100%);
+            border: 1px dashed rgba(56, 189, 248, 0.35);
+            padding: 16px;
+            border-radius: 18px;
             text-align: center;
         }
-        .container {
-            max-width: 450px;
-            margin: 40px auto;
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+        .promo-text {
+            font-size: 12.5px;
+            color: #cbd5e1;
+            margin-bottom: 12px;
+            font-weight: 500;
         }
-        /* تصميم اللوجو */
-        .logo {
-            width: 100px;
-            height: 100px;
-            object-fit: contain;
-            margin-bottom: 15px;
-            border-radius: 50%;
-        }
-        h2 {
-            color: #333;
-            margin-bottom: 10px;
-        }
-        p {
-            color: #666;
-            margin-bottom: 25px;
-            font-size: 14px;
-        }
-        /* الأزرار وروابط المنصات */
-        .btn {
+
+        .btn-get-hub {
             display: block;
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
+            background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+            color: #0f172a;
             text-decoration: none;
-            font-weight: bold;
-            border-radius: 8px;
-            font-size: 16px;
-            box-sizing: border-box;
-            transition: background 0.3s;
+            padding: 13px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14.5px;
+            box-shadow: 0 8px 20px rgba(56, 189, 248, 0.3);
+            transition: all 0.25s ease;
         }
-        /* زر الدفع أو انستاباي */
-        .btn-instapay {
-            background-color: #5b2d82; /* لون قريب لهوية انستاباي */
-            color: white;
+
+        .btn-get-hub:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(56, 189, 248, 0.45);
+            filter: brightness(1.05);
         }
-        .btn-instapay:hover {
-            background-color: #482367;
+
+.footer {
+            margin-top: 22px;
+            font-size: 11.5px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-glass);
+            padding-top: 14px;
         }
-        /* زر تقييم جوجل */
-        .btn-google {
-            background-color: #4285F4;
-            color: white;
-        }
-        .btn-google:hover {
-            background-color: #3367d6;
+
+        .footer span {
+            color: #38bdf8;
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- 1. اللوجو (تأكد أن صورة اللوجو مرفوعة في نفس المستودع باسم logo.png أو غير اسمها هنا) -->
-        <img src="logo.png" alt="شعار المتجر" class="logo" onerror="this.style.display='none'">
+        <!-- لوجو العميل -->
+        <div class="logo-container">
+            <img src="رابط_صورة_اللوجو_هنا" alt="Logo" class="logo">
+        </div>
         
-        <h2>بوابة الدفع والخدمات</h2>
-        <p>اختر الطريقة المناسبة لإتمام الدفع أو التواصل معنا</p>
-        
-        <!-- 2. زر Instapay (استبدل yourname@instapay بعنوان حسابك الحقيقي) -->
-        <a href="instapay://send?pa=yourname@instapay&am=&cu=EGP" class="btn btn-instapay">
-            الدفع عبر انستاباي (InstaPay)
+        <h1>قهوتنا</h1>
+        <p>أهلاً بك! نسعد دائماً بخدمتك وتقييمك لنا</p>
+
+        <!-- زرار تقييم جوجل -->
+        <a href="رابط_جوجل_هنا" class="btn btn-google" target="_blank">
+            ⭐ قيّمنا بـ 5 نجوم على جوجل
         </a>
 
-        <!-- ملاحظة نصية عنوان انستاباي للاحتياط -->
-        <p style="font-size: 12px; color: #888; margin-top: -5px; margin-bottom: 20px;">
-            العنوان اللحظي: <strong>yourname@instapay</strong>
-        </p>
-
-        <!-- 3. زر تقييم جوجل (استبدل الرابط برابط مراجعات جوجل الخاص بنشاطك) -->
-        <a href="https://maps.app.goo.gl/YOUR_GOOGLE_REVIEW_LINK" target="_blank" class="btn btn-google">
-            قيّمنا على جوجل (Google Review)
+        <!-- زرار إنستاباي -->
+        <a href="https://ipn.eg/" class="btn btn-instapay" target="_blank">
+            💳 الدفع الفوري عبر InstaPay
         </a>
+
+        <!-- قائمة المحافظ المنسدلة -->
+        <div class="dropdown">
+            <button class="drop-btn" onclick="toggleDropdown()">
+                <span>📱 الدفع عبر المحفظة الإلكترونية</span>
+                <span id="arrow">▾</span>
+            </button>
+            <div id="walletDropdown" class="drop-content">
+                <div class="wallet-item">
+                    <div class="wallet-info">
+                        <div class="w-name">فودافون كاش</div>
+                        <div class="w-num">01208884686</div>
+                        <div class="w-owner">باسم: mohamed m** a** a</div>
+                    </div>
+                    <button class="copy-btn" onclick="copyText('01208884686')">نسخ</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- أزرار السوشيال ميديا للمحل -->
+        <div class="social-group">
+            <a href="رابط_الفيسبوك_هنا" class="btn-social btn-facebook" target="_blank">فيسبوك</a>
+            <a href="رابط_الانستجرام_هنا" class="btn-social btn-instagram" target="_blank">انستجرام</a>
+            <a href="رابط_الواتساب_هنا" class="btn-social btn-whatsapp" target="_blank">واتساب</a>
+        </div>
+
+        <!-- زرار طلب الخدمة الاحترافي -->
+        <div class="promo-box">
+            <div class="promo-text">عجبك الستاند الذكي وحابب تعمل واحد لمشروعك؟ 🚀</div>
+            <a href="https://wa.me/201208884686?text=مرحباً%20ماضو،%20أعجبني%20نظام%20Tapio%20وأريد%20عمل%20ستاند%20ذكي%20لمشروعي" class="btn-get-hub" target="_blank">
+                ✨ احصل على ستاند ذكي لمشروعك الآن
+            </a>
+        </div>
+
+        <div class="footer">
+            Powered by <span>Tapio</span> 🚀
+        </div>
     </div>
+
+    <script>
+        function toggleDropdown() {
+            const dropdown = document.getElementById("walletDropdown");
+            dropdown.classList.toggle("show");
+        }
+
+        function copyText(text) {
+            navigator.clipboard.writeText(text);
+            alert("تم نسخ الرقم: " + text + " بنجاح! 📋");
+        }
+    </script>
 
 </body>
 </html>
