@@ -11,9 +11,6 @@
             --border-color: rgba(255, 255, 255, 0.1);
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --accent-google: #fbbf24;
-            --accent-instapay: #818cf8;
-            --accent-wallet: #f43f5e;
         }
 
         body {
@@ -42,7 +39,6 @@
         }
 
         .logo-container {
-            position: relative;
             width: 100px;
             height: 100px;
             margin: 0 auto 15px auto;
@@ -62,7 +58,6 @@
             font-size: 24px;
             margin-bottom: 5px;
             font-weight: 700;
-            letter-spacing: 0.5px;
         }
 
         p {
@@ -90,11 +85,6 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-        }
-
         .btn-google {
             background: linear-gradient(135deg, #f59e0b, #d97706);
             color: #000;
@@ -105,7 +95,6 @@
             color: #fff;
         }
 
-        /* القائمة المنسدلة للمحافظ */
         .dropdown {
             margin: 14px 0;
             width: 100%;
@@ -126,12 +115,6 @@
             align-items: center;
             box-sizing: border-box;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(244, 63, 94, 0.2);
-        }
-
-        .drop-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(244, 63, 94, 0.3);
         }
 
         .drop-content {
@@ -146,7 +129,7 @@
         }
 
         .drop-content.show {
-            max-height: 300px;
+            max-height: 350px;
             padding: 12px 10px;
             border-color: var(--border-color);
             transition: max-height 0.3s ease-in;
@@ -185,6 +168,13 @@
             font-family: monospace;
         }
 
+        /* تنسيق اسم صاحب المحفظة */
+        .wallet-info .w-owner {
+            font-size: 11px;
+            color: #cbd5e1;
+            margin-top: 3px;
+        }
+
         .copy-btn {
             background-color: #38bdf8;
             color: #0f172a;
@@ -218,21 +208,20 @@
 <body>
 
     <div class="container">
-        <!-- اللوجو -->
         <div class="logo-container">
-            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150" alt="Logo" class="logo">
+            <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=150" alt="Logo" class="logo">
         </div>
         
-        <h1>اسم المحل / العميل</h1>
+        <h1>قهوتنا</h1>
         <p>أهلاً بك! نسعد دائماً بخدمتك وتقييمك لنا</p>
 
         <!-- زرار تقييم جوجل -->
-        <a href="رابط_تقييم_جوجل_هنا" class="btn btn-google" target="_blank">
+        <a href="https://search.google.com/local/writereview?placeid=ChIJfdYbWADf9RQR_HyAz1upcCo" class="btn btn-google" target="_blank">
             ⭐ قيّمنا بـ 5 نجوم على جوجل
         </a>
 
         <!-- زرار إنستاباي -->
-        <a href="رابط_انستاباي_هنا" class="btn btn-instapay" target="_blank">
+        <a href="https://ipn.eg/" class="btn btn-instapay" target="_blank">
             💳 الدفع الفوري عبر InstaPay
         </a>
 
@@ -249,15 +238,17 @@
                     <div class="wallet-info">
                         <div class="w-name">فودافون كاش</div>
                         <div class="w-num">01208884686</div>
+                        <div class="w-owner">باسم: mohamed m** a** a</div>
                     </div>
                     <button class="copy-btn" onclick="copyText('01208884686')">نسخ</button>
                 </div>
 
-                <!-- محفظة 2 -->
+                <!-- محفظة 2 (يمكنك تغييرها لاحقاً لو حبيت) -->
                 <div class="wallet-item">
                     <div class="wallet-info">
-                        <div class="w-name">اتصالات / أورانج كاش</div>
+                        <div class="w-name">اتصالات / أورانج</div>
                         <div class="w-num">01012345678</div>
+                        <div class="w-owner">باسم: mohamed m** a** a</div>
                     </div>
                     <button class="copy-btn" onclick="copyText('01012345678')">نسخ</button>
                 </div>
@@ -265,7 +256,6 @@
             </div>
         </div>
 
-        <!-- الفوتر مع إمكانية تغيير حقوق النشر بالاسم اللي تحبه -->
         <div class="footer">
             Powered by <span>Tapio</span> 🚀
         </div>
