@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كيفان لاستيراد وتجارة البن الأخضر | البوابة الذكية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #111412;
+            --card-surface: rgba(22, 28, 24, 0.8);
+            --border-glow: rgba(140, 166, 122, 0.25);
+            --text-main: #f3f4f6;
+            --text-secondary: #a3b19b;
+            --primary-accent: #8ca67a;
+            --coffee-gold: #c29b38;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(140, 166, 122, 0.12) 0%, transparent 60%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+        }
+
+        .profile-card {
+            width: 100%;
+            max-width: 420px;
+            background: var(--card-surface);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--border-glow);
+            border-radius: 32px;
+            padding: 36px 22px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 160px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-accent), transparent);
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 16px auto;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-accent);
+            box-shadow: 0 0 30px rgba(140, 166, 122, 0.3);
+            background: #1a221d;
+        }
+
+        .business-title {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 4px;
+            color: #ffffff;
+        }
+
+        .business-subtitle {
+            color: var(--primary-accent);
+            font-size: 13.5px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .locations-box {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            line-height: 1.6;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 10px 14px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 15px 18px;
+            margin: 12px 0;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14.5px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+        }
+
+        .btn-instapay {
+            background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
+            color: #fff;
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.25);
+        }
+
+        /* المحافظ الإلكترونية المتعددة */
+        .wallets-wrapper {
+            margin: 12px 0;
+        }
+
+        .wallets-toggle-btn {
+            background: linear-gradient(135deg, #f43f5e 0%, #be123c 100%);
+            color: #fff;
+            width: 100%;
+            padding: 15px 18px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 14.5px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 25px rgba(244, 63, 94, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .wallets-toggle-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+        }
+
+        .wallets-dropdown {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(18, 24, 20, 0.6);
+            border-radius: 16px;
+            margin-top: 8px;
+            padding: 0 10px;
+        }
+
+        .wallets-dropdown.open {
+            max-height: 350px;
+            padding: 12px 10px;
+            border: 1px solid var(--border-glow);
+        }
+
+        .wallet-card-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .wallet-card-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .wallet-details {
+            text-align: right;
+        }
+
+        .wallet-type {
+            font-size: 12px;
+            color: var(--primary-accent);
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .wallet-number {
+            font-size: 14.5px;
+            font-family: monospace;
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
+
+        .copy-trigger {
+            background: var(--primary-accent);
+            color: #111412;
+            border: none;
+            padding: 7px 14px;
+            border-radius: 9px;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .copy-trigger:active {
+            transform: scale(0.92);
+        }
+
+        /* شبكة السوشيال ميديا */
+        .social-matrix {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 16px 0;
+        }
+
+        .social-link {
+            padding: 13px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: 0.25s;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .social-link:hover {
+            transform: translateY(-2px);
+        }
+
+        .s-fb { background: rgba(24, 119, 242, 0.12); color: #60a5fa; }
+        .s-wa { background: rgba(37, 211, 102, 0.12); color: #4ade80; }
+
+        /* بانر التسويق الذاتي لـ Tapio */
+        .self-promo-banner {
+            margin-top: 22px;
+            background: linear-gradient(135deg, rgba(140, 166, 122, 0.08) 0%, rgba(90, 115, 77, 0.15) 100%);
+            border: 1px dashed rgba(140, 166, 122, 0.4);
+            padding: 18px;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .promo-desc {
+            font-size: 12.5px;
+            color: #cbd5e1;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .promo-action-btn {
+            display: block;
+            background: linear-gradient(135deg, #8ca67a 0%, #5d784d 100%);
+            color: #111412;
+            text-decoration: none;
+            padding: 13px;
+            border-radius: 14px;
+            font-weight: 800;
+            font-size: 14.5px;
+            box-shadow: 0 10px 25px rgba(140, 166, 122, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .promo-action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(140, 166, 122, 0.4);
+        }
+
+        .brand-footer {
+            margin-top: 24px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 16px;
+            letter-spacing: 0.3px;
+        }
+
+        .brand-footer span {
+            color: var(--primary-accent);
+            font-weight: 800;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="profile-card">
+        <!-- شعار كيفان -->
+        <div class="avatar-wrapper">
+            <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=150" alt="Kayfan Logo" class="avatar">
+        </div>
+        
+        <h1 class="business-title">كيفان</h1>
+        <div class="business-subtitle">لاستيراد وتجارة البن الأخضر</div>
+        
+        <div class="locations-box">
+            📍 <b>المخازن:</b> كفر الدوار - ش المحكمة<br>
+            📍 <b>الإسكندرية:</b> أبو قير
+        </div>
+
+        <!-- إنستاباي -->
+        <a href="https://ipn.eg/S/islamfatthi/instapay/5jjyg5" class="action-btn btn-instapay" target="_blank">
+            <span>💳 الدفع الفوري عبر InstaPay</span>
+            <span>‹</span>
+        </a>
+
+        <!-- المحافظ الإلكترونية (رقمين) -->
+        <div class="wallets-wrapper">
+            <button class="wallets-toggle-btn" onclick="toggleWalletDrawer()">
+                <span>📱 فودافون كاش (المحافظ)</span>
+                <span id="drawerArrow">▼</span>
+            </button>
+            <div id="walletDrawer" class="wallets-dropdown">
+                <div class="wallet-card-item">
+                    <div class="wallet-details">
+                        <div class="wallet-type">رقم المحفظة الأول</div>
+                        <div class="wallet-number">01060113064</div>
+                    </div>
+                    <button class="copy-trigger" onclick="copyData('01060113064')">نسخ</button>
+                </div>
+                <div class="wallet-card-item">
+                    <div class="wallet-details">
+                        <div class="wallet-type">رقم المحفظة الثاني</div>
+                        <div class="wallet-number">01032709464</div>
+                    </div>
+                    <button class="copy-trigger" onclick="copyData('01032709464')">نسخ</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- السوشيال ميديا -->
+        <div class="social-matrix">
+            <a href="https://www.facebook.com/share/19etwy1QBC/?mibextid=wwXIfr" class="social-link s-fb" target="_blank">فيسبوك</a>
+            <a href="https://wa.me/message/K3ZRBFLIQGXVI1" class="social-link s-wa" target="_blank">واتساب</a>
+        </div>
+
+        <!-- التسويق الذاتي -->
+        <div class="self-promo-banner">
+            <div class="promo-desc">عجبك الستاند الذكي وحابب تعمل واحد لمشروعك؟ 🚀</div>
+            <a href="https://wa.me/201208884686?text=مرحباً%20ماضو،%20أعجبني%20نظام%20Tapio%20وأريد%20عمل%20ستاند%20ذكي%20لمشروعي" class="promo-action-btn" target="_blank">
+                ✨ احصل على ستاند ذكي لمشروعك الآن
+            </a>
+        </div>
+
+        <div class="brand-footer">
+            Powered by <span>Tapio</span> 🚀
+        </div>
+    </div>
+
+    <script>
+        function toggleWalletDrawer() {
+            const drawer = document.getElementById("walletDrawer");
+            const arrow = document.getElementById("drawerArrow");
+            drawer.classList.toggle("open");
+            arrow.style.transform = drawer.classList.contains("open") ? "rotate(180deg)" : "rotate(0deg)";
+        }
+
+        function copyData(text) {
+            navigator.clipboard.writeText(text);
+            alert("تم نسخ الرقم بنجاح! 📋");
+        }
+    </script>
+
+</body>
+</html>
